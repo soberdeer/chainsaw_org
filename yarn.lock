@@ -2604,6 +2604,46 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chainsaw_org@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "chainsaw_org@workspace:."
+  dependencies:
+    "@mantine/core": "npm:9.0.0"
+    "@mantine/hooks": "npm:9.0.0"
+    "@storybook/addon-themes": "npm:^10.0.0"
+    "@storybook/react": "npm:^10.0.0"
+    "@storybook/react-vite": "npm:^10.0.0"
+    "@tabler/icons-react": "npm:^3.41.1"
+    "@testing-library/dom": "npm:^10.4.1"
+    "@testing-library/jest-dom": "npm:^6.9.1"
+    "@testing-library/react": "npm:^16.3.0"
+    "@testing-library/user-event": "npm:^14.6.1"
+    "@types/node": "npm:^25.0.0"
+    "@types/react": "npm:^19.2.2"
+    "@types/react-dom": "npm:^19.2.1"
+    "@vitejs/plugin-react": "npm:^6.0.0"
+    identity-obj-proxy: "npm:^3.0.0"
+    jsdom: "npm:^29.0.0"
+    npm: "npm:^11.12.1"
+    oxfmt: "npm:^0.42.0"
+    oxlint: "npm:^1.58.0"
+    postcss: "npm:^8.5.6"
+    postcss-preset-mantine: "npm:1.18.0"
+    postcss-simple-vars: "npm:^7.0.1"
+    prop-types: "npm:^15.8.1"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    react-router-dom: "npm:^7.9.4"
+    react-zoomable-ui: "npm:^0.11.0"
+    storybook: "npm:^10.0.0"
+    stylelint: "npm:^17.0.0"
+    stylelint-config-standard-scss: "npm:^17.0.0"
+    typescript: "npm:6.0.2"
+    vite: "npm:^8.0.0"
+    vitest: "npm:^4.1.0"
+  languageName: unknown
+  linkType: soft
+
 "chalk@npm:^2.4.2":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2"
@@ -4344,46 +4384,6 @@ __metadata:
   checksum: 10c0/527580eb5e5476e6ad07a4e3bd017d13e935f4be815674b442081ae5a721c13d3af5715006619e6be79a85723067e047f83a0c9e699f41d8cec43609a8de4f7b
   languageName: node
   linkType: hard
-
-"mantine-vite-template@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "mantine-vite-template@workspace:."
-  dependencies:
-    "@mantine/core": "npm:9.0.0"
-    "@mantine/hooks": "npm:9.0.0"
-    "@storybook/addon-themes": "npm:^10.0.0"
-    "@storybook/react": "npm:^10.0.0"
-    "@storybook/react-vite": "npm:^10.0.0"
-    "@tabler/icons-react": "npm:^3.41.1"
-    "@testing-library/dom": "npm:^10.4.1"
-    "@testing-library/jest-dom": "npm:^6.9.1"
-    "@testing-library/react": "npm:^16.3.0"
-    "@testing-library/user-event": "npm:^14.6.1"
-    "@types/node": "npm:^25.0.0"
-    "@types/react": "npm:^19.2.2"
-    "@types/react-dom": "npm:^19.2.1"
-    "@vitejs/plugin-react": "npm:^6.0.0"
-    identity-obj-proxy: "npm:^3.0.0"
-    jsdom: "npm:^29.0.0"
-    npm: "npm:^11.12.1"
-    oxfmt: "npm:^0.42.0"
-    oxlint: "npm:^1.58.0"
-    postcss: "npm:^8.5.6"
-    postcss-preset-mantine: "npm:1.18.0"
-    postcss-simple-vars: "npm:^7.0.1"
-    prop-types: "npm:^15.8.1"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
-    react-router-dom: "npm:^7.9.4"
-    react-zoomable-ui: "npm:^0.11.0"
-    storybook: "npm:^10.0.0"
-    stylelint: "npm:^17.0.0"
-    stylelint-config-standard-scss: "npm:^17.0.0"
-    typescript: "npm:6.0.2"
-    vite: "npm:^8.0.0"
-    vitest: "npm:^4.1.0"
-  languageName: unknown
-  linkType: soft
 
 "mathml-tag-names@npm:^4.0.0":
   version: 4.0.0
