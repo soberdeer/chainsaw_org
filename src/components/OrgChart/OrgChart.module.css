@@ -1,0 +1,56 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.reactOrgChart {
+  margin: 2px;
+}
+
+.reactOrgChart .orgNodeChildGroup .node {
+  border: solid 1px light-dark(var(--mantine-color-gray-5), var(--mantine-color-gray-6));
+  display: inline-block;
+  padding: 4px;
+  width: 100px;
+}
+
+.reactOrgChart .orgNodeChildGroup .nodeCell {
+  text-align: center;
+}
+
+.reactOrgChart .orgNodeChildGroup .nodeGroupCell {
+  vertical-align: top;
+}
+
+.reactOrgChart .orgNodeChildGroup .nodeGroupLineVerticalMiddle {
+  height: 25px;
+  width: 50%;
+  border-right: 2px solid light-dark(var(--mantine-color-gray-5), var(--mantine-color-gray-6));
+}
+
+.reactOrgChart .nodeLineBorderTop {
+  border-top: solid 2px light-dark(var(--mantine-color-gray-5), var(--mantine-color-gray-6));
+}
+
+.reactOrgChart table {
+  border-collapse: collapse;
+  border: none;
+  margin: 0 auto;
+}
+
+.reactOrgChart td {
+  padding: 0;
+}
+
+.reactOrgChart table.nodeLineTable {
+  width: 100%;
+}
+
+.reactOrgChart table td.nodeCell {
+  width: 50%;
+}
+
+.group {
+  background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+}

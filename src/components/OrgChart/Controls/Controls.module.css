@@ -1,0 +1,6 @@
+.container {
+  position: fixed;
+  top: 100px;
+  right: var(--mantine-spacing-xl);
+  z-index: 10;
+}
