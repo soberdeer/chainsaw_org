@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-import { Space } from 'react-zoomable-ui';
 import { NodeProps } from '@/components/Node/Node';
 import { renderChildren } from '@/components/OrgChart/renderChildren';
 import classes from './OrgChart.module.css';

@@ -1,4 +1,4 @@
-import { RefObject, useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   Group,
   Paper,
@@ -8,10 +8,8 @@ import {
   Box,
   Badge,
   PaperProps,
-  Button,
   Anchor,
-  useMantineTheme,
-  useMantineColorScheme,
+  useComputedColorScheme,
 } from '@mantine/core';
 import { IconBrandTelegram, IconUser } from '@tabler/icons-react';
 import classes from './Node.module.css';
@@ -52,7 +50,7 @@ export function Node({
   ...others
 }: NodeProps) {
   const [rendered, setRendered] = useState(true);
-  const { colorScheme } = useMantineColorScheme();
+  const colorScheme = useComputedColorScheme();
   let startTime = 0;
   const maxDuration = 300;
 

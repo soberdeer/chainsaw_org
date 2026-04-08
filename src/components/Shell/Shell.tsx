@@ -9,9 +9,9 @@ export function Shell({ children }: AppShellProps) {
   return (
     <AppShell header={{ height: 60 }} padding="md">
       <AppShell.Header>
-        <Container size="xl">
-          <Group h="100%" px="md" justify="space-between">
-            <Group h="100%">
+        <Container size="xl" style={{ height: '100%' }}>
+          <Group h="100%" px="md" justify="space-between" align="center">
+            <Group h="100%" align="center">
               <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
               ДНБ
             </Group>
