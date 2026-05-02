@@ -1,7 +1,7 @@
-import { Provider } from './context';
-import { Space } from 'react-zoomable-ui';
 import { useRef } from 'react';
-import { Controls } from '@/components/Tree/Controls/Controls';
+import { Space } from 'react-zoomable-ui';
+// import { Controls } from '@/components/Tree/Controls/Controls';
+import { Provider } from './context';
 
 const MIN_ZOOM = 0.2;
 const MAX_ZOOM = 2.5;

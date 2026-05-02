@@ -1,20 +1,13 @@
-import clsx from 'clsx';
 import { Group, Paper, Stack, Title } from '@mantine/core';
+import clsx from 'clsx';
 import { Node, type NodeProps } from '@/components/Node/Node';
 import classes from './Tree.module.css';
 
-export const renderChildren = (
-  node: NodeProps,
-  groupped?: boolean,
-): React.ReactElement => {
+export const renderChildren = (node: NodeProps, groupped?: boolean): React.ReactElement => {
   const children = node.children ?? [];
   const groupedChildren = node.groupedChildren ?? [];
 
-  const contentColSpan = Math.max(
-    children.length * 2,
-    groupedChildren.length * 2,
-    2,
-  );
+  const contentColSpan = Math.max(children.length * 2, groupedChildren.length * 2, 2);
 
   const hasSiblingRight = (childIndex: number, total: number): boolean => {
     return total > childIndex + 1;
@@ -28,46 +21,36 @@ export const renderChildren = (
     <td colSpan={children.length * 2} className={classes.nodeGroupCellLines}>
       <table className={classes.nodeLineTable}>
         <tbody>
-        <tr>
-          <td
-            colSpan={2}
-            className={clsx(
-              classes.nodeLineCell,
-              classes.nodeGroupLineVerticalMiddle,
-            )}
-          />
-          <td colSpan={2} className={classes.nodeLineCell} />
-        </tr>
+          <tr>
+            <td
+              colSpan={2}
+              className={clsx(classes.nodeLineCell, classes.nodeGroupLineVerticalMiddle)}
+            />
+            <td colSpan={2} className={classes.nodeLineCell} />
+          </tr>
         </tbody>
       </table>
     </td>
   );
 
-  const childrenLinesAbove = children.map((child, childIndex) => (
+  const childrenLinesAbove = children.map((_, childIndex) => (
     <td colSpan={2} className={classes.nodeGroupCellLines} key={childIndex}>
       <table className={classes.nodeLineTable}>
         <tbody>
-        <tr>
-          <td
-            colSpan={2}
-            className={clsx(
-              classes.nodeLineCell,
-              classes.nodeGroupLineVerticalMiddle,
-              {
+          <tr>
+            <td
+              colSpan={2}
+              className={clsx(classes.nodeLineCell, classes.nodeGroupLineVerticalMiddle, {
                 [classes.nodeLineBorderTop]: hasSiblingLeft(childIndex),
-              },
-            )}
-          />
-          <td
-            colSpan={2}
-            className={clsx(classes.nodeLineCell, {
-              [classes.nodeLineBorderTop]: hasSiblingRight(
-                childIndex,
-                children.length,
-              ),
-            })}
-          />
-        </tr>
+              })}
+            />
+            <td
+              colSpan={2}
+              className={clsx(classes.nodeLineCell, {
+                [classes.nodeLineBorderTop]: hasSiblingRight(childIndex, children.length),
+              })}
+            />
+          </tr>
         </tbody>
       </table>
     </td>
@@ -81,22 +64,16 @@ export const renderChildren = (
 
   const groupedNodeLineBelow = groupedChildren.length > 0 && (
     <tr>
-      <td
-        colSpan={groupedChildren.length * 2}
-        className={classes.nodeGroupCellLines}
-      >
+      <td colSpan={groupedChildren.length * 2} className={classes.nodeGroupCellLines}>
         <table className={classes.nodeLineTable}>
           <tbody>
-          <tr>
-            <td
-              colSpan={2}
-              className={clsx(
-                classes.nodeLineCell,
-                classes.nodeGroupLineVerticalMiddle,
-              )}
-            />
-            <td colSpan={2} className={classes.nodeLineCell} />
-          </tr>
+            <tr>
+              <td
+                colSpan={2}
+                className={clsx(classes.nodeLineCell, classes.nodeGroupLineVerticalMiddle)}
+              />
+              <td colSpan={2} className={classes.nodeLineCell} />
+            </tr>
           </tbody>
         </table>
       </td>
@@ -104,45 +81,30 @@ export const renderChildren = (
   );
 
   const groupedLinesAbove = groupedChildren.map((group, groupIndex) => (
-    <td
-      colSpan={2}
-      className={classes.nodeGroupCellLines}
-      key={`${group.name}-${groupIndex}`}
-    >
+    <td colSpan={2} className={classes.nodeGroupCellLines} key={`${group.name}-${groupIndex}`}>
       <table className={classes.nodeLineTable}>
         <tbody>
-        <tr>
-          <td
-            colSpan={2}
-            className={clsx(
-              classes.nodeLineCell,
-              classes.nodeGroupLineVerticalMiddle,
-              {
+          <tr>
+            <td
+              colSpan={2}
+              className={clsx(classes.nodeLineCell, classes.nodeGroupLineVerticalMiddle, {
                 [classes.nodeLineBorderTop]: hasSiblingLeft(groupIndex),
-              },
-            )}
-          />
-          <td
-            colSpan={2}
-            className={clsx(classes.nodeLineCell, {
-              [classes.nodeLineBorderTop]: hasSiblingRight(
-                groupIndex,
-                groupedChildren.length,
-              ),
-            })}
-          />
-        </tr>
+              })}
+            />
+            <td
+              colSpan={2}
+              className={clsx(classes.nodeLineCell, {
+                [classes.nodeLineBorderTop]: hasSiblingRight(groupIndex, groupedChildren.length),
+              })}
+            />
+          </tr>
         </tbody>
       </table>
     </td>
   ));
 
   const groupedNodes = groupedChildren.map((group, groupIndex) => (
-    <td
-      colSpan={2}
-      className={classes.nodeGroupCell}
-      key={`${group.name}-${groupIndex}`}
-    >
+    <td colSpan={2} className={classes.nodeGroupCell} key={`${group.name}-${groupIndex}`}>
       <div
         style={{
           padding: 25,
@@ -173,29 +135,29 @@ export const renderChildren = (
   return (
     <table className={classes.orgNodeChildGroup}>
       <tbody>
-      <tr>
-        <td className={classes.nodeCell} colSpan={contentColSpan}>
-          <Group justify="center">
-            <Node {...node} withBorder={groupped} my={0} mx="md" />
-          </Group>
-        </td>
-      </tr>
+        <tr>
+          <td className={classes.nodeCell} colSpan={contentColSpan}>
+            <Group justify="center">
+              <Node {...node} withBorder={groupped} my={0} mx="md" />
+            </Group>
+          </td>
+        </tr>
 
-      {children.length > 0 && (
-        <>
-          <tr>{nodeLineBelow}</tr>
-          <tr>{childrenLinesAbove}</tr>
-          <tr>{childNodes}</tr>
-        </>
-      )}
+        {children.length > 0 && (
+          <>
+            <tr>{nodeLineBelow}</tr>
+            <tr>{childrenLinesAbove}</tr>
+            <tr>{childNodes}</tr>
+          </>
+        )}
 
-      {groupedChildren.length > 0 && (
-        <>
-          {groupedNodeLineBelow}
-          <tr>{groupedLinesAbove}</tr>
-          <tr>{groupedNodes}</tr>
-        </>
-      )}
+        {groupedChildren.length > 0 && (
+          <>
+            {groupedNodeLineBelow}
+            <tr>{groupedLinesAbove}</tr>
+            <tr>{groupedNodes}</tr>
+          </>
+        )}
       </tbody>
     </table>
   );

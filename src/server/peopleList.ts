@@ -36,11 +36,11 @@ function normalizeTelegram(value: string | undefined): string | null {
 
   if (trimmed.includes('t.me/')) {
     const username = trimmed
-    .split('t.me/')[1]
-    ?.split(/[/?#]/)[0]
-    ?.replace(/^@+/, '')
-    .trim()
-    .toLowerCase();
+      .split('t.me/')[1]
+      ?.split(/[/?#]/)[0]
+      ?.replace(/^@+/, '')
+      .trim()
+      .toLowerCase();
 
     return username ? `@${username}` : null;
   }
@@ -67,9 +67,9 @@ function formatTelegram(value: string | null): string | null {
 }
 
 function unique(values: string[]): string[] {
-  return Array.from(
-    new Set(values.map((value) => value.trim()).filter(Boolean)),
-  ).sort((a, b) => a.localeCompare(b, 'ru'));
+  return Array.from(new Set(values.map((value) => value.trim()).filter(Boolean))).sort((a, b) =>
+    a.localeCompare(b, 'ru')
+  );
 }
 
 function getNodeContact(node: PersonTreeNode): string | null {
@@ -93,7 +93,7 @@ function getRowKey(node: PersonTreeNode): string {
 function addToDepartmentMap(
   departmentMap: Map<string, Set<string>>,
   departments: string[],
-  subdepartments: string[],
+  subdepartments: string[]
 ) {
   for (const department of unique(departments)) {
     const current = departmentMap.get(department) ?? new Set<string>();
@@ -111,7 +111,7 @@ function mergePersonRow(
   node: PersonTreeNode,
   departments: string[],
   subdepartments: string[],
-  leaderOf: string[] = [],
+  leaderOf: string[] = []
 ) {
   const username = getNodeUsername(node);
   const contact = getNodeContact(node);
@@ -121,17 +121,9 @@ function mergePersonRow(
   existing.contact = existing.contact ?? contact;
   existing.isLead = existing.isLead || leaderOf.length > 0;
 
-  existing.departments = unique([
-    ...existing.departments,
-    ...departments,
-    ...node.type,
-  ]);
+  existing.departments = unique([...existing.departments, ...departments, ...node.type]);
 
-  existing.subdepartments = unique([
-    ...existing.subdepartments,
-    ...subdepartments,
-    ...node.group,
-  ]);
+  existing.subdepartments = unique([...existing.subdepartments, ...subdepartments, ...node.group]);
 
   existing.leaderOf = unique([...existing.leaderOf, ...leaderOf]);
 }
@@ -142,17 +134,13 @@ function addUserOccurrence(
   node: PersonTreeNode,
   departments: string[],
   subdepartments: string[],
-  leaderOf: string[] = [],
+  leaderOf: string[] = []
 ) {
   const normalizedDepartments = unique([...departments, ...node.type]);
   const normalizedSubdepartments = unique([...subdepartments, ...node.group]);
   const normalizedLeaderOf = unique(leaderOf);
 
-  addToDepartmentMap(
-    departmentMap,
-    normalizedDepartments,
-    normalizedSubdepartments,
-  );
+  addToDepartmentMap(departmentMap, normalizedDepartments, normalizedSubdepartments);
 
   const key = getRowKey(node);
   const existing = rowsByUser.get(key);
@@ -163,7 +151,7 @@ function addUserOccurrence(
       node,
       normalizedDepartments,
       normalizedSubdepartments,
-      normalizedLeaderOf,
+      normalizedLeaderOf
     );
 
     return;
@@ -196,7 +184,7 @@ function getLeaderDepartments(leader: PersonTreeNode): string[] {
 
 function shouldSplitLeaderGroupsAsDepartments(
   leader: PersonTreeNode,
-  leaderDepartments: string[],
+  leaderDepartments: string[]
 ): boolean {
   const directGroupNames = leader.groupedChildren.map((group) => group.name);
 
@@ -206,10 +194,7 @@ function shouldSplitLeaderGroupsAsDepartments(
   );
 }
 
-function getNodeFallbackSubdepartments(
-  node: PersonTreeNode,
-  departments: string[],
-): string[] {
+function getNodeFallbackSubdepartments(node: PersonTreeNode, departments: string[]): string[] {
   if (node.group.length > 0) {
     return unique(node.group);
   }
@@ -222,7 +207,7 @@ function walkNode(
   departmentMap: Map<string, Set<string>>,
   node: PersonTreeNode,
   departments: string[],
-  inheritedSubdepartments: string[] = [],
+  inheritedSubdepartments: string[] = []
 ) {
   const subdepartments =
     inheritedSubdepartments.length > 0
@@ -245,7 +230,7 @@ function walkGroup(
   departmentMap: Map<string, Set<string>>,
   group: PersonTreeGroup,
   departments: string[],
-  subdepartments: string[],
+  subdepartments: string[]
 ) {
   addToDepartmentMap(departmentMap, departments, subdepartments);
 
@@ -257,12 +242,12 @@ function walkGroup(
 function walkLeader(
   rowsByUser: Map<string, PersonListRow>,
   departmentMap: Map<string, Set<string>>,
-  leader: PersonTreeNode,
+  leader: PersonTreeNode
 ) {
   const leaderDepartments = getLeaderDepartments(leader);
   const splitDirectGroupsAsDepartments = shouldSplitLeaderGroupsAsDepartments(
     leader,
-    leaderDepartments,
+    leaderDepartments
   );
 
   if (splitDirectGroupsAsDepartments) {
@@ -272,7 +257,7 @@ function walkLeader(
       leader,
       leaderDepartments,
       leaderDepartments,
-      leaderDepartments,
+      leaderDepartments
     );
 
     for (const group of leader.groupedChildren) {
@@ -286,10 +271,7 @@ function walkLeader(
     return;
   }
 
-  const leaderSubdepartments = getNodeFallbackSubdepartments(
-    leader,
-    leaderDepartments,
-  );
+  const leaderSubdepartments = getNodeFallbackSubdepartments(leader, leaderDepartments);
 
   addUserOccurrence(
     rowsByUser,
@@ -297,7 +279,7 @@ function walkLeader(
     leader,
     leaderDepartments,
     leaderSubdepartments,
-    leaderDepartments,
+    leaderDepartments
   );
 
   for (const child of leader.children) {
@@ -312,11 +294,11 @@ function walkLeader(
 function toDepartmentMap(map: Map<string, Set<string>>): DepartmentMap {
   return Object.fromEntries(
     Array.from(map.entries())
-    .sort(([first], [second]) => first.localeCompare(second, 'ru'))
-    .map(([department, subdepartments]) => [
-      department,
-      Array.from(subdepartments).sort((a, b) => a.localeCompare(b, 'ru')),
-    ]),
+      .sort(([first], [second]) => first.localeCompare(second, 'ru'))
+      .map(([department, subdepartments]) => [
+        department,
+        Array.from(subdepartments).sort((a, b) => a.localeCompare(b, 'ru')),
+      ])
   );
 }
 
@@ -338,9 +320,7 @@ export async function getPeopleListData(): Promise<PeopleListData> {
   }
 
   return {
-    users: Array.from(rowsByUser.values()).sort((a, b) =>
-      a.name.localeCompare(b.name, 'ru'),
-    ),
+    users: Array.from(rowsByUser.values()).sort((a, b) => a.name.localeCompare(b.name, 'ru')),
     departmentMap: toDepartmentMap(departmentMap),
   };
 }

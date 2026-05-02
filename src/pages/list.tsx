@@ -1,11 +1,7 @@
-import type { GetStaticProps } from 'next';
 import { Container, Title } from '@mantine/core';
-import {
-  getPeopleListData,
-  type DepartmentMap,
-  type PersonListRow,
-} from '@/server/peopleList';
+import type { GetStaticProps } from 'next';
 import { UsersListTable } from '@/components/UsersListTable/UsersListTable';
+import { getPeopleListData, type DepartmentMap, type PersonListRow } from '@/server/peopleList';
 
 type ListPageProps = {
   users: PersonListRow[];

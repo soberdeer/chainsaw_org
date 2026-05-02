@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Group,
   Paper,
@@ -12,7 +11,8 @@ import {
   useComputedColorScheme,
 } from '@mantine/core';
 import { IconBrandTelegram, IconUser } from '@tabler/icons-react';
-import { NoPanArea, Pressable, Space } from 'react-zoomable-ui';
+import { useState } from 'react';
+import { NoPanArea, Pressable } from 'react-zoomable-ui';
 import { getGroupColor } from './group-colors';
 import classes from './Node.module.css';
 
@@ -61,7 +61,7 @@ export function Node({
   };
 
   const handleNodeClick = () => {
-    console.log('click');
+    // console.log('click');
   };
 
   const handleMouseDown = () => {
@@ -139,7 +139,11 @@ export function Node({
                 const name = href?.replace('https://t.me/', '');
                 return (
                   <NoPanArea key={k}>
-                    <Anchor href={href || '#'} target="_blank" style={{ width: 'fit-content', display: 'block' }}>
+                    <Anchor
+                      href={href || '#'}
+                      target="_blank"
+                      style={{ width: 'fit-content', display: 'block' }}
+                    >
                       <Group wrap="nowrap" gap={4}>
                         <Icon />
                         <Text>{name}</Text>

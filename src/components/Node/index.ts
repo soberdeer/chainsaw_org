@@ -1,2 +1,2 @@
-export * from './Node'
-export type {NodeProps} from './Node'
+export * from './Node';
+export type { NodeProps } from './Node';

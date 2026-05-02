@@ -1,7 +1,7 @@
 import type { NodeProps } from '@/components/Node';
+import { SpaceProvider } from '@/hooks/use-space-controller';
 import { renderChildren } from './renderChildren';
 import classes from './Tree.module.css';
-import { SpaceProvider } from '@/hooks/use-space-controller';
 
 type OrgChartProps = {
   tree: NodeProps;

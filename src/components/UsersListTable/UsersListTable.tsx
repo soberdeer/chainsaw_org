@@ -1,4 +1,3 @@
-import { useMemo, useState } from 'react';
 import {
   Anchor,
   Avatar,
@@ -12,6 +11,8 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
+import { IconStar } from '@tabler/icons-react';
+import { useMemo, useState } from 'react';
 import { getGroupColor } from '@/components/Node/group-colors';
 import type { DepartmentMap, PersonListRow } from '@/server/peopleList';
 import { HeaderCell } from './HeaderCell/HeaderCell';
@@ -27,7 +28,6 @@ import {
   unique,
 } from './helpers';
 import classes from './UsersListTable.module.css';
-import { IconStar } from "@tabler/icons-react";
 
 type UsersListTableProps = {
   users: PersonListRow[];
@@ -41,19 +41,16 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
   const [sortKey, setSortKey] = useState<SortKey>('name');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
-  const departmentOptions = useMemo(
-    () => getDepartmentOptions(departmentMap),
-    [departmentMap],
-  );
+  const departmentOptions = useMemo(() => getDepartmentOptions(departmentMap), [departmentMap]);
 
   const subdepartmentOptions = useMemo(
     () => getSubdepartmentOptions(departmentMap, departmentFilter),
-    [departmentMap, departmentFilter],
+    [departmentMap, departmentFilter]
   );
 
   const departmentsBySubdepartment = useMemo(
     () => getDepartmentsBySubdepartment(departmentMap),
-    [departmentMap],
+    [departmentMap]
   );
 
   const filteredUsers = useMemo(
@@ -64,9 +61,9 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
         departmentFilter,
         subdepartmentFilter,
         sortKey,
-        sortDirection,
+        sortDirection
       ),
-    [users, search, departmentFilter, subdepartmentFilter, sortKey, sortDirection],
+    [users, search, departmentFilter, subdepartmentFilter, sortKey, sortDirection]
   );
 
   const handleDepartmentFilterChange = (value: string[]) => {
@@ -76,13 +73,10 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
       return;
     }
 
-    const nextAvailableSubdepartments = getAvailableSubdepartments(
-      departmentMap,
-      value,
-    );
+    const nextAvailableSubdepartments = getAvailableSubdepartments(departmentMap, value);
 
     setSubdepartmentFilter((current) =>
-      filterSelectedSubdepartments(current, nextAvailableSubdepartments),
+      filterSelectedSubdepartments(current, nextAvailableSubdepartments)
     );
   };
 
@@ -92,16 +86,14 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
     const nextAvailableSubdepartments = departmentMap[department] ?? [];
 
     setSubdepartmentFilter((current) =>
-      filterSelectedSubdepartments(current, nextAvailableSubdepartments),
+      filterSelectedSubdepartments(current, nextAvailableSubdepartments)
     );
   };
 
   const handleSubdepartmentBadgeClick = (subdepartment: string) => {
     setSubdepartmentFilter([subdepartment]);
 
-    const relatedDepartments = Array.from(
-      departmentsBySubdepartment.get(subdepartment) ?? [],
-    );
+    const relatedDepartments = Array.from(departmentsBySubdepartment.get(subdepartment) ?? []);
 
     if (relatedDepartments.length > 0) {
       setDepartmentFilter(relatedDepartments);
@@ -144,9 +136,7 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
         <MultiSelect
           label="Подотдел"
           placeholder={
-            departmentFilter.length > 0
-              ? 'Подотделы выбранных отделов'
-              : 'Все подотделы'
+            departmentFilter.length > 0 ? 'Подотделы выбранных отделов' : 'Все подотделы'
           }
           data={subdepartmentOptions}
           value={subdepartmentFilter}
@@ -200,8 +190,6 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
                 sortDirection={sortDirection}
                 onSort={handleSort}
               />
-
-
             </Table.Tr>
           </Table.Thead>
 
@@ -214,7 +202,7 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
               return (
                 <Table.Tr key={user.id}>
                   <Table.Td>
-                    <Avatar src={user.avatar} name={user.name} radius="xl"/>
+                    <Avatar src={user.avatar} name={user.name} radius="xl" />
                   </Table.Td>
 
                   <Table.Td>
@@ -236,9 +224,7 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        <Highlight highlight={search}>
-                          {user.username || ''}
-                        </Highlight>
+                        <Highlight highlight={search}>{user.username || ''}</Highlight>
                       </Anchor>
                     )}
                   </Table.Td>
@@ -246,28 +232,30 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
                   <Table.Td>
                     {leaderOf.length > 0 && (
                       <Group gap={4}>
-                        {leaderOf.map((department) => (
-                          department.toLowerCase() !== 'администрация' ? <Badge
-                            key={department}
-                            variant="filled"
-                            color={getGroupColor(department)}
-                            className={classes.clickableBadge}
-                            onClick={() => handleDepartmentBadgeClick(department)}
-                          >
-                            <Group gap={5} align="center" wrap="nowrap">
-                              <IconStar size={16}/>
-                              {department}
-                            </Group>
-                          </Badge> : null
-                        ))}
+                        {leaderOf.map((department) =>
+                          department.toLowerCase() !== 'администрация' ? (
+                            <Badge
+                              key={department}
+                              variant="filled"
+                              color={getGroupColor(department)}
+                              className={classes.clickableBadge}
+                              onClick={() => handleDepartmentBadgeClick(department)}
+                            >
+                              <Group gap={5} align="center" wrap="nowrap">
+                                <IconStar size={16} />
+                                {department}
+                              </Group>
+                            </Badge>
+                          ) : null
+                        )}
                       </Group>
                     )}
                   </Table.Td>
 
                   <Table.Td>
                     <Group gap="xs">
-                      {departments.length > 0
-                        && departments.map((department) => (
+                      {departments.length > 0 &&
+                        departments.map((department) => (
                           <Badge
                             key={department}
                             variant="filled"
@@ -285,18 +273,17 @@ export function UsersListTable({ users, departmentMap }: UsersListTableProps) {
                     <Group gap="xs">
                       {subdepartments.length > 0
                         ? subdepartments.map((subdepartment) => (
-                          <Badge
-                            key={subdepartment}
-                            variant="outline"
-                            color={getGroupColor(subdepartment)}
-                            className={classes.clickableBadge}
-                            onClick={() =>
-                              handleSubdepartmentBadgeClick(subdepartment)
-                            }
-                          >
-                            {subdepartment}
-                          </Badge>
-                        )) : null}
+                            <Badge
+                              key={subdepartment}
+                              variant="outline"
+                              color={getGroupColor(subdepartment)}
+                              className={classes.clickableBadge}
+                              onClick={() => handleSubdepartmentBadgeClick(subdepartment)}
+                            >
+                              {subdepartment}
+                            </Badge>
+                          ))
+                        : null}
                     </Group>
                   </Table.Td>
                 </Table.Tr>

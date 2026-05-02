@@ -1,16 +1,9 @@
+import { AppShell, type AppShellProps, Burger, Container, Group, NavLink } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useDisclosure } from '@mantine/hooks';
-import {
-  AppShell,
-  type AppShellProps,
-  Burger,
-  Container,
-  Group,
-  NavLink,
-} from '@mantine/core';
 import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
-import { Logo } from "@/components/Shell/Logo";
+import { Logo } from '@/components/Shell/Logo';
 import classes from './Shell.module.css';
 
 const navigationItems = [
@@ -28,30 +21,17 @@ export function Shell({ children }: AppShellProps) {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure();
 
-
-
   return (
     <AppShell header={{ height: 60 }} padding="md">
       <AppShell.Header>
         <Container size="xl" h="100%">
-          <Group
-            h="100%"
-            px="md"
-            justify="space-between"
-            align="center"
-            wrap="nowrap"
-          >
+          <Group h="100%" px="md" justify="space-between" align="center" wrap="nowrap">
             <Group h="100%" align="center" gap="md" wrap="nowrap">
-              <Burger
-                opened={opened}
-                onClick={toggle}
-                hiddenFrom="sm"
-                size="sm"
-              />
+              <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
 
-              <Link href="/tree" >
+              <Link href="/tree">
                 <Group style={{ height: '100%' }} align="center">
-                  <Logo width={80}/>
+                  <Logo width={80} />
                 </Group>
               </Link>
 
@@ -71,7 +51,7 @@ export function Shell({ children }: AppShellProps) {
             </Group>
 
             <div className={classes.actions}>
-              <ColorSchemeToggle/>
+              <ColorSchemeToggle />
             </div>
           </Group>
         </Container>

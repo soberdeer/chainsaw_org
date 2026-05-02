@@ -93,7 +93,7 @@ async function loadNodes() {
 
 function toTreeNode(
   node: LoadedNode,
-  childrenByParentNodeId: Map<string, LoadedNode[]>,
+  childrenByParentNodeId: Map<string, LoadedNode[]>
 ): PersonTreeNode {
   return {
     id: node.id,
@@ -103,16 +103,14 @@ function toTreeNode(
     avatar: node.avatar,
     type: node.types.map((item) => item.type.name),
     group: node.groups.map((item) => item.group.name),
-    contacts: Object.fromEntries(
-      node.contacts.map((contact) => [contact.kind, contact.value]),
-    ),
+    contacts: Object.fromEntries(node.contacts.map((contact) => [contact.kind, contact.value])),
     children: (childrenByParentNodeId.get(node.id) ?? []).map((child) =>
-      toTreeNode(child, childrenByParentNodeId),
+      toTreeNode(child, childrenByParentNodeId)
     ),
     groupedChildren: (node.groupedChildren ?? []).map((group) => ({
       name: group.name,
       children: (group.children ?? []).map((child) =>
-        toTreeNode(child as LoadedNode, childrenByParentNodeId),
+        toTreeNode(child as LoadedNode, childrenByParentNodeId)
       ),
     })),
   };
@@ -133,9 +131,7 @@ export async function getPeopleTree(): Promise<PersonTreeNode | null> {
     childrenByParentNodeId.set(node.parentNodeId, children);
   }
 
-  const root = nodes.find(
-    (node) => node.parentNodeId === null && node.parentGroupId === null,
-  );
+  const root = nodes.find((node) => node.parentNodeId === null && node.parentGroupId === null);
 
   if (!root) {
     return null;

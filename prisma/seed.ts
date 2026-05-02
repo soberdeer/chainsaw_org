@@ -1,13 +1,15 @@
 import 'dotenv/config';
-import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaNeon } from '@prisma/adapter-neon';
 import { PrismaClient } from '@/generated/prisma/client';
-import { mock } from '@/mock';
+import { mock } from './mock';
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
+const adapter = new PrismaNeon({
+  connectionString: process.env.DATABASE_URL_UNPOOLED!,
 });
 
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({
+  adapter,
+});
 
 type MockNode = {
   name: string;
@@ -46,7 +48,7 @@ async function createNode(
   node: MockNode,
   sortOrder: number,
   parentNodeId: string | null,
-  parentGroupId: string | null,
+  parentGroupId: string | null
 ) {
   const createdNode = await prisma.personNode.create({
     data: {
@@ -128,6 +130,7 @@ async function main() {
 
   await createNode(mock as MockNode, 0, null, null);
 
+  // eslint-disable-next-line
   console.log({
     nodes: await prisma.personNode.count(),
     groupBlocks: await prisma.groupBlock.count(),
@@ -139,6 +142,7 @@ async function main() {
 
 main()
   .catch((error) => {
+    // eslint-disable-next-line
     console.error(error);
     process.exit(1);
   })

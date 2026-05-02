@@ -22,10 +22,7 @@ export function HeaderCell({
 
   return (
     <Table.Th {...rest}>
-      <UnstyledButton
-        className={classes.headerButton}
-        onClick={() => onSort(sortKey)}
-      >
+      <UnstyledButton className={classes.headerButton} onClick={() => onSort(sortKey)}>
         <Group gap={6} wrap="nowrap">
           <Text fw={600} size="sm">
             {label}

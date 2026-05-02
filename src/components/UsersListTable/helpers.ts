@@ -28,9 +28,9 @@ export function stringify(value: string[] | string | boolean | null): string {
 }
 
 export function unique(values: string[]): string[] {
-  return Array.from(
-    new Set(values.map((value) => value.trim()).filter(Boolean)),
-  ).sort((a, b) => a.localeCompare(b, 'ru'));
+  return Array.from(new Set(values.map((value) => value.trim()).filter(Boolean))).sort((a, b) =>
+    a.localeCompare(b, 'ru')
+  );
 }
 
 export function hasAnyIntersection(first: string[], second: string[]): boolean {
@@ -44,7 +44,7 @@ export function getSortValue(user: PersonListRow, key: SortKey): string {
 export function sortUsers(
   users: PersonListRow[],
   sortKey: SortKey,
-  sortDirection: SortDirection,
+  sortDirection: SortDirection
 ): PersonListRow[] {
   return [...users].sort((a, b) => {
     const first = getSortValue(a, sortKey);
@@ -71,9 +71,9 @@ export function includesSearch(user: PersonListRow, search: string): boolean {
     ...user.leaderOf,
     user.isLead ? 'лид' : '',
   ]
-  .filter(Boolean)
-  .join(' ')
-  .toLowerCase();
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
 
   return haystack.includes(normalizedSearch);
 }
@@ -94,7 +94,7 @@ export function getAllSubdepartments(departmentMap: DepartmentMap): string[] {
 }
 
 export function getDepartmentsBySubdepartment(
-  departmentMap: DepartmentMap,
+  departmentMap: DepartmentMap
 ): Map<string, Set<string>> {
   const map = new Map<string, Set<string>>();
 
@@ -112,32 +112,28 @@ export function getDepartmentsBySubdepartment(
 
 export function getAvailableSubdepartments(
   departmentMap: DepartmentMap,
-  departmentFilter: string[],
+  departmentFilter: string[]
 ): string[] {
   if (departmentFilter.length === 0) {
     return getAllSubdepartments(departmentMap);
   }
 
-  return unique(
-    departmentFilter.flatMap((department) => departmentMap[department] ?? []),
-  );
+  return unique(departmentFilter.flatMap((department) => departmentMap[department] ?? []));
 }
 
 export function getSubdepartmentOptions(
   departmentMap: DepartmentMap,
-  departmentFilter: string[],
+  departmentFilter: string[]
 ): SelectOption[] {
-  return toSelectOptions(
-    getAvailableSubdepartments(departmentMap, departmentFilter),
-  );
+  return toSelectOptions(getAvailableSubdepartments(departmentMap, departmentFilter));
 }
 
 export function filterSelectedSubdepartments(
   selectedSubdepartments: string[],
-  availableSubdepartments: string[],
+  availableSubdepartments: string[]
 ): string[] {
   return selectedSubdepartments.filter((subdepartment) =>
-    availableSubdepartments.includes(subdepartment),
+    availableSubdepartments.includes(subdepartment)
   );
 }
 
@@ -145,14 +141,13 @@ export function filterUsers(
   users: PersonListRow[],
   search: string,
   departmentFilter: string[],
-  subdepartmentFilter: string[],
+  subdepartmentFilter: string[]
 ): PersonListRow[] {
   return users.filter((user) => {
     const matchesSearch = includesSearch(user, search);
 
     const matchesDepartment =
-      departmentFilter.length === 0 ||
-      hasAnyIntersection(user.departments, departmentFilter);
+      departmentFilter.length === 0 || hasAnyIntersection(user.departments, departmentFilter);
 
     const matchesSubdepartment =
       subdepartmentFilter.length === 0 ||
@@ -168,11 +163,11 @@ export function getFilteredAndSortedUsers(
   departmentFilter: string[],
   subdepartmentFilter: string[],
   sortKey: SortKey,
-  sortDirection: SortDirection,
+  sortDirection: SortDirection
 ): PersonListRow[] {
   return sortUsers(
     filterUsers(users, search, departmentFilter, subdepartmentFilter),
     sortKey,
-    sortDirection,
+    sortDirection
   );
 }

@@ -1,16 +1,29 @@
+// @ts-nocheck
+
+import { Record } from 'effect/Schema';
+
 type GroupKey = 'Сеттинг' | 'Структура' | 'Арки' | 'Геймдизайн' | 'Код' | 'Арт' | string;
 
-type GroupKeyEn = 'setting' | 'structure' | 'arch' | 'gd' | 'code' | 'art' | string;
+const ruMap = {
+  setting: 'сеттинг',
+  structure: 'структура',
+  arch: 'арки',
+  gd: 'геймдизайн',
+  'g-d': 'гейм-дизайн',
+  code: 'код',
+  art: 'арт',
+  script: 'сценарий',
+};
 
 const colors = {
-  сеттинг: 'yellow',
-  структура: 'grape',
-  арки: 'red',
-  сценарий: 'indigo',
-  'гейм-дизайн': 'orange',
-  геймдизайн: 'orange',
-  код: 'green',
-  арт: 'teal',
+  [ruMap.setting]: 'yellow',
+  [ruMap.structure]: 'grape',
+  [ruMap.arch]: 'red',
+  [ruMap.script]: 'indigo',
+  [ruMap['g-d']]: 'orange',
+  [ruMap.gd]: 'orange',
+  [ruMap.code]: 'green',
+  [ruMap.art]: 'teal',
 } as Record<GroupKey, string>;
 
 export const getGroupColor = (group: GroupKey) => {
