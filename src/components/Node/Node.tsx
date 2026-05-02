@@ -12,9 +12,9 @@ import {
   useComputedColorScheme,
 } from '@mantine/core';
 import { IconBrandTelegram, IconUser } from '@tabler/icons-react';
-import classes from './Node.module.css';
 import { NoPanArea, Pressable, Space } from 'react-zoomable-ui';
-import { getGroupColor } from '@/components/Node/group-colors';
+import { getGroupColor } from './group-colors';
+import classes from './Node.module.css';
 
 export interface NodeProps extends PaperProps {
   name: string;
@@ -139,7 +139,7 @@ export function Node({
                 const name = href?.replace('https://t.me/', '');
                 return (
                   <NoPanArea key={k}>
-                    <Anchor href={href || '#'} style={{ width: 'fit-content', display: 'block' }}>
+                    <Anchor href={href || '#'} target="_blank" style={{ width: 'fit-content', display: 'block' }}>
                       <Group wrap="nowrap" gap={4}>
                         <Icon />
                         <Text>{name}</Text>

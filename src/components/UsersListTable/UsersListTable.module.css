@@ -1,0 +1,17 @@
+.search {
+  min-width: 260px;
+  flex: 1;
+}
+
+.filter {
+  min-width: 220px;
+}
+
+.clickableBadge {
+  cursor: pointer;
+  user-select: none;
+}
+
+.clickableBadge:hover {
+  opacity: 0.8;
+}

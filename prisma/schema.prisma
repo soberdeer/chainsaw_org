@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model PersonNode {
+  id          String  @id @default(cuid())
+  name        String
+  job         String?
+  description String?
+  avatar      String?
+  sortOrder   Int     @default(0)
+
+  parentNodeId String?
+  parentNode   PersonNode?  @relation("PersonNodeChildren", fields: [parentNodeId], references: [id], onDelete: Cascade)
+  children     PersonNode[] @relation("PersonNodeChildren")
+
+  parentGroupId String?
+  parentGroup   GroupBlock? @relation("GroupBlockChildren", fields: [parentGroupId], references: [id], onDelete: Cascade)
+
+  groupedChildren GroupBlock[] @relation("OwnerNodeGroupBlocks")
+
+  contacts Contact[]
+  types    PersonNodeType[]
+  groups   PersonNodeGroup[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([parentNodeId])
+  @@index([parentGroupId])
+  @@index([sortOrder])
+}
+
+model GroupBlock {
+  id        String @id @default(cuid())
+  name      String
+  sortOrder Int    @default(0)
+
+  ownerNodeId String
+  ownerNode   PersonNode @relation("OwnerNodeGroupBlocks", fields: [ownerNodeId], references: [id], onDelete: Cascade)
+
+  children PersonNode[] @relation("GroupBlockChildren")
+
+  @@index([ownerNodeId])
+  @@index([sortOrder])
+}
+
+model Type {
+  id    String           @id @default(cuid())
+  name  String           @unique
+  nodes PersonNodeType[]
+}
+
+model Group {
+  id    String            @id @default(cuid())
+  name  String            @unique
+  nodes PersonNodeGroup[]
+}
+
+model PersonNodeType {
+  nodeId String
+  typeId String
+
+  node PersonNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  type Type       @relation(fields: [typeId], references: [id], onDelete: Cascade)
+
+  @@id([nodeId, typeId])
+}
+
+model PersonNodeGroup {
+  nodeId  String
+  groupId String
+
+  node  PersonNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  group Group      @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@id([nodeId, groupId])
+}
+
+model Contact {
+  id     String @id @default(cuid())
+  nodeId String
+  kind   String
+  value  String
+
+  node PersonNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+
+  @@index([nodeId])
+}

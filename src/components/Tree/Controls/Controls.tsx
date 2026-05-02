@@ -5,7 +5,7 @@ import classes from './Controls.module.css';
 
 export const Controls = ({ currentZoom }: { currentZoom: number }) => {
   const { zoomPlus, setZoom, zoomMinus, maxZoom, minZoom } = useSpaceController();
-  console.log(currentZoom);
+
   return (
     <Stack gap="md" className={classes.container} align="center">
       <ActionIcon size="lg" variant="default" onClick={zoomPlus}>

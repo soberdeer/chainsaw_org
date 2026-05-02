@@ -3,7 +3,7 @@ import type { OxlintConfig } from 'oxlint';
 export default {
   plugins: ['react', 'typescript', 'jsx-a11y', 'jest'],
 
-  ignorePatterns: ['**/*.{mjs,cjs,js,d.ts,d.mts}', 'dist', 'storybook-static'],
+  ignorePatterns: ['**/*.{mjs,cjs,js,d.ts,d.mts}', '.next', 'storybook-static'],
 
   rules: {
     'array-callback-return': 'error',

@@ -15,9 +15,6 @@ const colors = {
 
 export const getGroupColor = (group: GroupKey) => {
   const color = colors[group.toLocaleLowerCase()];
-  console.log('-----');
-  console.log(group.toLowerCase());
-  console.log(colors[group.toLocaleLowerCase()]);
   if (!color) {
     return 'blue';
   }

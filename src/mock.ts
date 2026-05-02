@@ -113,15 +113,15 @@ export const mock = {
               },
             },
             {
-              name: 'k0n4ik Belyaaanin',
+              name: 'k0t0ry Belyaaanin',
               type: ['Сценарий'],
               group: ['Арки', 'Cеттинг'],
               description: null,
               avatar:
-                'https://cdn4.telesco.pe/file/jP3tyqoSTp-3xL6Y_pNPJWpCd-e1i42zeRTaMBWhoA5IaODLobTRg7saHDHZ8xy62pix6bi5bkOK282rE97b5oRBPU9T_8231qZxGPDcoo8WkNfw-NapRtTf00WOV7eLsEfns_SIzemjxnu8_CjYmfQqOzKS3i_h2aXOwxqiqRpcc0k9fkezRpkxW_1N93djakpT4awL0uBfGrD24BBCn9DutfMu4kDPgwSNup2Hn_h5e_jVWLnfNTe19MZwu5DOEavTFhzYnd0CaOf6fLfFgaR2AOJFG3pjrmNQqBSWHvg2199DZwfWuCb1QTS_Y3lWA6RfikV6vlN4-gNf1c0Shg.jpg',
+                'https://d1dtcx9hvyki7y.cloudfront.net/fern-cms-3-prd/0f882df3-63f3-4416-89ec-172f51e69708.jpeg',
               children: [],
               contacts: {
-                tg: 'https://t.me/k0n4ik',
+                tg: 'https://t.me/@k0t0ry',
               },
             },
             {
@@ -273,15 +273,15 @@ export const mock = {
               },
             },
             {
-              name: 'k0n4ik Belyaaanin',
+              name: 'k0t0ry Belyaaanin',
               type: ['Сценарий'],
               group: ['Арки', 'Cеттинг'],
               description: null,
               avatar:
-                'https://cdn4.telesco.pe/file/jP3tyqoSTp-3xL6Y_pNPJWpCd-e1i42zeRTaMBWhoA5IaODLobTRg7saHDHZ8xy62pix6bi5bkOK282rE97b5oRBPU9T_8231qZxGPDcoo8WkNfw-NapRtTf00WOV7eLsEfns_SIzemjxnu8_CjYmfQqOzKS3i_h2aXOwxqiqRpcc0k9fkezRpkxW_1N93djakpT4awL0uBfGrD24BBCn9DutfMu4kDPgwSNup2Hn_h5e_jVWLnfNTe19MZwu5DOEavTFhzYnd0CaOf6fLfFgaR2AOJFG3pjrmNQqBSWHvg2199DZwfWuCb1QTS_Y3lWA6RfikV6vlN4-gNf1c0Shg.jpg',
+                'https://d1dtcx9hvyki7y.cloudfront.net/fern-cms-3-prd/0f882df3-63f3-4416-89ec-172f51e69708.jpeg',
               children: [],
               contacts: {
-                tg: 'https://t.me/k0n4ik',
+                tg: 'https://t.me/k0t0ry',
               },
             },
             {
@@ -402,18 +402,6 @@ export const mock = {
               children: [],
               contacts: {
                 tg: 'https://t.me/Dasha_bee_Dasha',
-              },
-            },
-            {
-              name: 'Александр Ковальчук',
-              type: ['Код'],
-              group: ['Код'],
-              description: null,
-              avatar:
-                'https://d1dtcx9hvyki7y.cloudfront.net/fern-cms-3-prd/691617a2-8fa3-449c-9839-9c9c6629f614.jpg',
-              children: [],
-              contacts: {
-                tg: 'https://t.me/Teo_Reat',
               },
             },
             {

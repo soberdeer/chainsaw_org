@@ -1,13 +1,13 @@
-import { NodeProps } from '@/components/Node/Node';
-import { renderChildren } from '@/components/OrgChart/renderChildren';
-import classes from './OrgChart.module.css';
+import type { NodeProps } from '@/components/Node';
+import { renderChildren } from './renderChildren';
+import classes from './Tree.module.css';
 import { SpaceProvider } from '@/hooks/use-space-controller';
 
 type OrgChartProps = {
   tree: NodeProps;
 };
 
-export function OrgChart({ tree }: OrgChartProps) {
+export function Tree({ tree }: OrgChartProps) {
   return (
     <>
       <SpaceProvider>
